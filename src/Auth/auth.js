@@ -57,14 +57,25 @@ export function signIn(username, password) {
       Pool: userPool,
     });
 
+  
+
+
     cognitoUser.authenticateUser(authenticationDetails, {
       onSuccess: (result) => {
+        console.log(result);
+        const token = result.idToken.jwtToken;
+        localStorage.setItem('token-lrq', token);
         resolve(result);
       },
       onFailure: (err) => {
         reject(err);
       },
     });
+
+  
+    
+
+
   });
 }
 
@@ -108,6 +119,7 @@ export function signOut() {
   const cognitoUser = userPool.getCurrentUser();
   if (cognitoUser) {
     cognitoUser.signOut();
+    localStorage.removeItem('token-lrq');
   }
 }
 

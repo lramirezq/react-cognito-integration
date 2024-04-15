@@ -1,20 +1,32 @@
-import { useContext } from "react"
-import { AuthContext } from "./AuthContext"
+import { useContext } from "react";
+import { AuthContext } from "./AuthContext";
+import './UserProfile.css'; // Importa tu archivo de estilos CSS
 
 export default function UserProfile() {
-  const { user, signOut } = useContext(AuthContext)
+  const { user, signOut } = useContext(AuthContext);
+
+ 
+  const token = localStorage.getItem('CognitoIdentityServiceProvider.2cmlccm2odhdtvnjumgrpabp5l.lramirez@3htp.com.idToken');
+
+if (token) {
+  console.log('Token JWT:', token);
+} else {
+  console.log('Token JWT no encontrado en el almacenamiento local');
+}
+
+
 
   return (
-    <div>
+    <div className="container">
       {user && (
-        <div>
+        <div className="user-profile">
           <h2>User Profile</h2>
           <p>Username: {user.username}</p>
           <p>Email: {user.email}</p>
-          {/* Display any other user data here */}
+          {/* Mostrar cualquier otro dato del usuario aquí */}
         </div>
       )}
-      <button onClick={signOut}>Sign Out</button>
+      <button className="btn" onClick={signOut}>Sign Out</button>
     </div>
-  )
+  );
 }

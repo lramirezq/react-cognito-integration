@@ -10,34 +10,43 @@ import Profile from "./Auth/UserProfile";
 import ForgotPassword from "./Auth/ForgotPassword";
 import ResetPassword from "./Auth/ResetPassword";
 import RouteGuard from "./RouteGuard";
+import Products from "./Componentes/Products";
+
+
 
 function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/contact">Contact</Link>
-            </li>
-            <li>
-              <Link to="/profile">Profile</Link>
-            </li>
-          </ul>
-        </nav>
-
+      <nav>
+  <ul>
+    <li>
+      <a href="/signup">Registrar User</a>
+    </li>
+    <li>
+      <a href="/confirm-sign-up">Confirmar User</a>
+    </li>
+    <li>
+      <a href="/login">Login</a>
+    </li>
+    <li>
+      <a href="/contact">Contact</a>
+    </li>
+    <li>
+      <a href="/profile">Profile</a>
+    </li>
+    <li>
+      <a href="/products">Productos</a>
+    </li>
+  </ul>
+</nav>
+<br/>
+<hr/>
         <main>
           <Routes>
+      
             <Route path="/" element={<Home />} />
+            <Route path="/products" element={<Products />} />
             <Route path="/about" element={<Profile />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login />} />

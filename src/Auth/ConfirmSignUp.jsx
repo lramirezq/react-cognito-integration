@@ -1,52 +1,58 @@
-import { useState } from "react"
-import { confirmSignUp } from "./auth"
+import { useState } from "react";
+import { confirmSignUp } from "./auth";
 
 export default function ConfirmSignUp() {
-  const [username, setUsername] = useState("")
-  const [code, setCode] = useState("")
-  const [error, setError] = useState("")
-  const [success, setSuccess] = useState(false)
+  const [username, setUsername] = useState("");
+  const [code, setCode] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setError("")
+    e.preventDefault();
+    setError("");
 
     try {
-      await confirmSignUp(username, code)
-      setSuccess(true)
+      await confirmSignUp(username, code);
+      setSuccess(true);
     } catch (err) {
-      setError(err.message)
+      setError(err.message);
     }
-  }
+  };
 
   if (success) {
     return (
-      <div>
-        <h2>Confirmation successful!</h2>
-        <p>You can now log in with your credentials. Go rock that app!</p>
+      <div className="container">
+        <h2>Confirmación exitosa!</h2>
+        <p>Ahora puedes hacer Login <a href="/login"> Aqui !! </a></p>
       </div>
-    )
+    );
   }
 
   return (
-    <div>
+    <div className="container">
       <h2>Confirm Sign Up</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Confirmation code"
-          value={code}
-          onChange={(e) => setCode(e.target.value)}
-        />
-        <button type="submit">Confirm</button>
+      <form className="form-container" onSubmit={handleSubmit}>
+        <div className="form-group">
+          <input
+            type="text"
+            className="input-field"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <input
+            type="text"
+            className="input-field"
+            placeholder="Confirmation code"
+            value={code}
+            onChange={(e) => setCode(e.target.value)}
+          />
+        </div>
+        <button type="submit" className="btn">Confirm</button>
       </form>
-      {error && <p>{error}</p>}
+      {error && <p className="error-message">{error}</p>}
     </div>
-  )
+  );
 }
